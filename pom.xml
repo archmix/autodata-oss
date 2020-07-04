@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.archmix</groupId>
+    <artifactId>java-parent</artifactId>
+    <version>1.8.2</version>
+  </parent>
+
+  <artifactId>autodata-oss</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <modules>
+    <module>autodata-dataflow</module>
+    <module>autodata-pipeline</module>
+    <module>autodata-relational</module>
+  </modules>
+
+  <properties>
+    <autodataVersion>0.0.1-SNAPSHOT</autodataVersion>
+    <legolasVersion>1.0.5</legolasVersion>
+    <toolboxVersion>0.0.3</toolboxVersion>
+
+    <beamVersion>2.20.0</beamVersion>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.archmix</groupId>
+        <artifactId>autodata-dataflow</artifactId>
+        <version>${autodataVersion}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.archmix</groupId>
+        <artifactId>autodata-dataflow</artifactId>
+        <version>${autodataVersion}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.archmix</groupId>
+        <artifactId>legolas-oss</artifactId>
+        <version>${legolasVersion}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.archmix</groupId>
+        <artifactId>toolbox-oss</artifactId>
+        <version>${toolboxVersion}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.beam</groupId>
+        <artifactId>beam-sdks-java-core</artifactId>
+        <version>${beamVersion}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.beam</groupId>
+        <artifactId>beam-sdks-java-io-jdbc</artifactId>
+        <version>${beamVersion}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.apache.beam</groupId>
+        <artifactId>beam-runners-direct-java</artifactId>
+        <version>${beamVersion}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+</project>
