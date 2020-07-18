@@ -15,65 +15,32 @@
   <packaging>pom</packaging>
 
   <modules>
-    <module>autodata-dataflow</module>
-    <module>autodata-pipeline</module>
     <module>autodata-relational</module>
   </modules>
 
   <properties>
     <autodataVersion>0.0.1-SNAPSHOT</autodataVersion>
     <legolasVersion>1.0.5</legolasVersion>
-    <toolboxVersion>0.0.3</toolboxVersion>
 
     <beamVersion>2.20.0</beamVersion>
   </properties>
 
   <dependencyManagement>
     <dependencies>
+      <!--AUTODATA -->
       <dependency>
         <groupId>org.archmix</groupId>
-        <artifactId>autodata-dataflow</artifactId>
+        <artifactId>autodata-relational</artifactId>
         <version>${autodataVersion}</version>
       </dependency>
 
-      <dependency>
-        <groupId>org.archmix</groupId>
-        <artifactId>autodata-dataflow</artifactId>
-        <version>${autodataVersion}</version>
-      </dependency>
-
+      <!-- LEGOLAS -->
       <dependency>
         <groupId>org.archmix</groupId>
         <artifactId>legolas-oss</artifactId>
         <version>${legolasVersion}</version>
         <type>pom</type>
         <scope>import</scope>
-      </dependency>
-
-      <dependency>
-        <groupId>org.archmix</groupId>
-        <artifactId>toolbox-oss</artifactId>
-        <version>${toolboxVersion}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-
-      <dependency>
-        <groupId>org.apache.beam</groupId>
-        <artifactId>beam-sdks-java-core</artifactId>
-        <version>${beamVersion}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.apache.beam</groupId>
-        <artifactId>beam-sdks-java-io-jdbc</artifactId>
-        <version>${beamVersion}</version>
-      </dependency>
-
-      <dependency>
-        <groupId>org.apache.beam</groupId>
-        <artifactId>beam-runners-direct-java</artifactId>
-        <version>${beamVersion}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>

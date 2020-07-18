@@ -6,13 +6,16 @@ import com.google.common.collect.Maps;
 import compozitor.processor.core.interfaces.AnnotationModel;
 import compozitor.processor.core.interfaces.MethodModel;
 import compozitor.processor.core.interfaces.TypeModel;
+import compozitor.processor.core.interfaces.TypeName;
 import org.apache.beam.sdk.options.Description;
-import org.apache.beam.sdk.options.Validation;
 
 import java.util.Map;
 import java.util.Optional;
 
 public class TemplateMetadataFactory {
+
+  private static final TypeName REQUIRED_TYPE_NAME = TypeName.create("org.apache.beam.sdk.options.Validation.Required");
+
   public static Optional<TemplateMetadata> create(TypeModel typeModel) {
     Optional<AnnotationModel> annotation = typeModel.getAnnotations().getBy(TemplateMetadataSpecification.class);
     if(!annotation.isPresent()) {
@@ -44,14 +47,20 @@ public class TemplateMetadataFactory {
     String label = methodModel.getName().replace("set", "").replace("get", "");
     String description = null;
 
+    String name = label;
+    String twoFirstLetters = name.substring(0, 2);
+    if(!twoFirstLetters.equalsIgnoreCase(twoFirstLetters.toUpperCase())){
+      name = "";//TODO: uncapitalize_string
+    }
+
     AnnotationModel descriptionAnnotation = methodModel.getAnnotations().getBy(Description.class).orElse(null);
     if(descriptionAnnotation != null) {
       description = descriptionAnnotation.value("value");
     }
 
-    AnnotationModel requiredAnnotation = methodModel.getAnnotations().getBy("org.apache.beam.sdk.options.Validation.Required").orElse(null);
+    AnnotationModel requiredAnnotation = methodModel.getAnnotations().getBy(REQUIRED_TYPE_NAME).orElse(null);
     Boolean is_optional = requiredAnnotation == null;
 
-    return Parameter.create(label, label, description, is_optional);
+    return Parameter.create(name, label, description, is_optional);
   }
 }
